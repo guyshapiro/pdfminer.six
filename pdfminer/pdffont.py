@@ -1,6 +1,7 @@
 
 import sys
 import struct
+import logging
 from io import BytesIO
 from .cmapdb import CMapDB
 from .cmapdb import CMapParser
@@ -30,6 +31,7 @@ from .utils import isnumber
 
 import six #Python 2+3 compatibility
 
+log = logging.getLogger(__name__)
 
 def get_widths(seq):
     widths = {}
@@ -548,6 +550,7 @@ class PDFSimpleFont(PDFFont):
         else:
             encoding = LITERAL_STANDARD_ENCODING
         if isinstance(encoding, dict):
+            log.info("Font encoding: %r", encoding)
             name = literal_name(encoding.get('BaseEncoding', LITERAL_STANDARD_ENCODING))
             diff = list_value(encoding.get('Differences', []))
             self.cid2unicode = EncodingDB.get_encoding(name, diff)
