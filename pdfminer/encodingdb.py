@@ -63,6 +63,7 @@ class EncodingDB(object):
                     try:
                         cid2unicode[cid] = name2unicode(x.name)
                     except KeyError:
-                        log.warning("no encoding for glyph name %r",x.name)
+                        if x.name != ".notdef":
+                            log.warning("no encoding for glyph name %r",x.name)
                     cid += 1
         return cid2unicode
