@@ -66,4 +66,6 @@ class EncodingDB(object):
                         if x.name != ".notdef":
                             log.warning("no encoding for glyph name %r",x.name)
                     cid += 1
+                else:
+                    log.error("unexpected object %r", x)
         return cid2unicode

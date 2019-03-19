@@ -116,7 +116,8 @@ class Type1FontHeaderParser(PSStackParser):
             try:
                 self._cid2unicode[cid] = name2unicode(name)
             except KeyError:
-                pass
+                if name != ".notdef":
+                    log.warning("no encoding for glyph name %r", name)
         return self._cid2unicode
 
     def do_keyword(self, pos, token):
