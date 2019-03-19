@@ -3,6 +3,7 @@ import re
 import logging
 from .psparser import PSLiteral
 from .glyphlist import glyphname2unicode
+from .gcidlist import glyphname2unicode as gcid2unicode
 from .latin_enc import ENCODING
 
 import six # Python 2+3 compatibility
@@ -18,6 +19,8 @@ def name2unicode(name):
     """Converts Adobe glyph names to Unicode numbers."""
     if name in glyphname2unicode:
         return glyphname2unicode[name]
+    if name in gcid2unicode:
+        return gcid2unicode[name]
     m = STRIP_NAME.search(name)
     if not m:
         raise KeyError(name)
